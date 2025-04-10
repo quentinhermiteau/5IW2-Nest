@@ -11,7 +11,7 @@ export default function AuthedLayout({
   return (
     <SidebarProvider>
       <Header />
-      <main className="px-4">
+      <main className="px-4 w-full">
         <SidebarTrigger />
         {children}
       </main>

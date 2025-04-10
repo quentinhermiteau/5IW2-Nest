@@ -8,7 +8,10 @@ export class UsersService {
 
   findAll(params: { page: number; limit: number }) {
     const { page, limit } = params;
-    return this.prisma.user.findMany({ skip: limit * (page - 1), take: limit });
+    return this.prisma.user.findMany({
+      skip: limit * (page - 1),
+      take: limit,
+    });
   }
 
   findOneByEmail(email: string) {

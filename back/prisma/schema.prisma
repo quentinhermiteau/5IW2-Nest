@@ -22,10 +22,53 @@ datasource db {
 }
 
 model User {
-  id        Int     @id @default(autoincrement())
-  email     String  @unique
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
   password  String?
   firstName String
   lastName  String
-  role      Role    @default(USER)
+  birthDate DateTime @default(now())
+  student   Student?
+  teacher   Teacher?
+}
+
+model Promotion {
+  id                Int                 @id @default(autoincrement())
+  name              String
+  startDate         DateTime
+  endDate           DateTime
+  promotion_Student Promotion_Student[]
+  promotion_Teacher Promotion_Teacher[]
+}
+
+model Promotion_Student {
+  student     Student   @relation(fields: [studentId], references: [id])
+  studentId   Int
+  promotion   Promotion @relation(fields: [promotionId], references: [id])
+  promotionId Int
+
+  @@id([studentId, promotionId])
+}
+
+model Promotion_Teacher {
+  teacher     Teacher   @relation(fields: [teacherId], references: [id])
+  teacherId   Int
+  promotion   Promotion @relation(fields: [promotionId], references: [id])
+  promotionId Int
+
+  @@id([teacherId, promotionId])
+}
+
+model Student {
+  id                Int                 @id @default(autoincrement())
+  user              User                @relation(fields: [userId], references: [id])
+  userId            Int                 @unique
+  promotion_Student Promotion_Student[]
+}
+
+model Teacher {
+  id                Int                 @id @default(autoincrement())
+  user              User                @relation(fields: [userId], references: [id])
+  userId            Int                 @unique
+  promotion_Teacher Promotion_Teacher[]
 }

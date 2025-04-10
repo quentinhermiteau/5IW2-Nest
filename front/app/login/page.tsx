@@ -38,6 +38,9 @@ export default function Login() {
     }
 
     window.localStorage.setItem("token", result.data.access_token);
+    window.localStorage.setItem("user", JSON.stringify(result.data.user));
+    setUser(result.data.user);
+
     router.push("/dashboard");
   };
 

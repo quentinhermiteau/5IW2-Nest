@@ -7,6 +7,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { AuthModule } from './auth/auth.module';
 import { PrismaService } from './prisma.service';
 import { UsersModule } from './users/users.module';
+import { StudentsModule } from './students/students.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UsersModule } from './users/users.module';
     }),
     AuthModule,
     UsersModule,
+    StudentsModule,
   ],
   controllers: [AppController],
   providers: [

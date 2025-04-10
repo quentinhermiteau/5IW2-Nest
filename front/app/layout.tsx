@@ -1,10 +1,8 @@
 "use client";
 
 import { Geist, Geist_Mono } from "next/font/google";
-import { useRouter } from "next/navigation";
-import { useContext } from "react";
 
-import { authContext } from "@/context/authContext";
+import { AuthProvider } from "@/context/authContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -22,19 +20,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const router = useRouter();
-  const { user } = useContext(authContext);
-
-  if (!user) {
-    router.push("/login");
-  }
-
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <main>{children}</main>
+        <AuthProvider>
+          <main>{children}</main>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -1,7 +1,9 @@
 "use client";
 
-import { User } from "@/types/user";
+import { useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
+
+import { User } from "@/types/user";
 
 export const authContext = createContext<{
   user: User | null;
@@ -12,18 +14,18 @@ export const authContext = createContext<{
 });
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
     const userJson = window.localStorage.getItem("user");
+
     if (userJson) {
-      try {
-        setUser(JSON.parse(userJson));
-      } catch (e) {
-        setUser(null);
-      }
+      setUser(JSON.parse(userJson));
+    } else {
+      router.push("/login");
     }
   }, []);
 
