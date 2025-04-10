@@ -39,8 +39,12 @@ export class AuthService {
       lastName: user.lastName,
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...userWithoutPassword } = user;
+
     return {
       access_token: await this.jwtService.signAsync(payload),
+      user: userWithoutPassword,
     };
   }
 

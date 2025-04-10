@@ -9,11 +9,9 @@ import {
   Put,
   Query,
   Res,
-  UseGuards,
 } from '@nestjs/common';
 import { ApiParam } from '@nestjs/swagger';
 import { Response } from 'express';
-import { AuthGuard } from 'src/auth/auth.guard';
 import { CreateOrUpdateUserDto } from './dto/createOrUpdateUser';
 import { FindAllUsersDto } from './dto/usersList';
 import { UsersService } from './users.service';
@@ -37,7 +35,6 @@ export class UsersController {
     return 'Find all users';
   }
 
-  @UseGuards(AuthGuard)
   @Post()
   async createUser(@Body() createUser: CreateOrUpdateUserDto) {
     return await this.usersService.createUser(createUser);
