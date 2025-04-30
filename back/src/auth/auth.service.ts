@@ -12,7 +12,7 @@ interface registerData {
 }
 
 export interface JwtPayload {
-  sub: number;
+  sub: string;
   email: string;
   firstName: string;
   lastName: string;

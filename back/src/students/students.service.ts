@@ -1,15 +1,22 @@
 import { Injectable } from '@nestjs/common';
 
 import { PrismaService } from 'src/prisma.service';
+import { TokensService } from 'src/tokens/tokens.service';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
 
 @Injectable()
 export class StudentsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private readonly tokenService: TokensService,
+  ) {}
 
-  create(createStudentDto: CreateStudentDto) {
-    return this.prisma.student.create({
+  async create(createStudentDto: CreateStudentDto) {
+    const student = await this.prisma.student.create({
+      select: {
+        user: true,
+      },
       data: {
         user: {
           create: {
@@ -18,6 +25,8 @@ export class StudentsService {
         },
       },
     });
+
+    await this.tokenService.create(student.user.id, 'INVITATION');
   }
 
   findAll() {

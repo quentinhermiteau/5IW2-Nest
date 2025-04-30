@@ -141,19 +141,6 @@ export default function addStudent() {
                   </FormItem>
                 )}
               />
-              {/* <FormField
-                control={form.control}
-                name="lastName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Nom</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /> */}
             </div>
           </div>
           <div className="flex justify-end mt-4">
