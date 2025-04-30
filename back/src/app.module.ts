@@ -14,6 +14,7 @@ import { TokensController } from './tokens/tokens.controller';
 import { TokensModule } from './tokens/tokens.module';
 import { TokensService } from './tokens/tokens.service';
 import { UsersModule } from './users/users.module';
+import { EventsGateway } from './events/events.gateway';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { UsersModule } from './users/users.module';
       provide: APP_GUARD,
       useClass: AuthGuard,
     },
+    EventsGateway,
   ],
 })
 export class AppModule {}
