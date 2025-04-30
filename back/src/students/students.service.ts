@@ -9,7 +9,15 @@ export class StudentsService {
   constructor(private prisma: PrismaService) {}
 
   create(createStudentDto: CreateStudentDto) {
-    return 'This action adds a new student';
+    return this.prisma.student.create({
+      data: {
+        user: {
+          create: {
+            ...createStudentDto,
+          },
+        },
+      },
+    });
   }
 
   findAll() {

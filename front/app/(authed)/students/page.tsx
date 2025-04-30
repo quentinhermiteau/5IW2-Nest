@@ -32,8 +32,6 @@ export default function StudentsPage() {
     fetchStudents();
   }, []);
 
-  console.log(students);
-
   return (
     <div>
       <div className="flex justify-between my-4">

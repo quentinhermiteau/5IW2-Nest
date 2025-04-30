@@ -17,7 +17,7 @@ interface Option {
 interface InputProps {
   label: string;
   name: string;
-  type?: "text" | "select";
+  type?: "text" | "email" | "select";
   options?: Option[];
 }
 
@@ -46,10 +46,5 @@ export default function Input({
       </div>
     );
   }
-  return (
-    <div className="space-y-2">
-      <Label htmlFor={name}>{label}</Label>
-      <UiInput type={type} name={name} />
-    </div>
-  );
+  return <UiInput type={type} name={name} />;
 }

@@ -12,8 +12,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import api from "@/lib/api";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Register() {
+  const router = useRouter();
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -22,14 +25,14 @@ export default function Register() {
     const lastName = formData.get("lastName");
     const password = formData.get("password");
 
-    const result = await api.post("auth/register", {
+    await api.post("auth/register", {
       email,
       firstName,
       lastName,
       password,
     });
 
-    console.log(result.data);
+    router.push("/login");
   };
 
   return (
